@@ -26,7 +26,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - id: Build
     - name: Build API
       run: dotnet build src/OnlineBankingAPIGateway/OnlineBankingAPIGateway.csproj --no-restore
 
