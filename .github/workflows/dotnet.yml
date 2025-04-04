@@ -26,7 +26,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore OnlineBankingSOA/OnlineBanking.sln
       
-    - id: Build
     - name: Build API
       run: dotnet build OnlineBankingAPIGateway/OnlineBankingAPIGateway.csproj --no-restore
 
@@ -34,7 +33,7 @@ jobs:
       run: dotnet build OnlineBankingSOA/OnlineBanking.csproj --no-restore
       
     - id: Test
-      if: steps.build.outcome == 'success'
+     # if: steps.build.outcome == 'success'
       name: Test
       run: dotnet test OnlineBankingTest/OnlineBankingTest.csproj --collect "XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
 
