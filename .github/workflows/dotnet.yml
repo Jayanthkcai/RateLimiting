@@ -49,16 +49,59 @@ jobs:
         indicators: true
         output: console
 
-    - id: publish
-      name: Publish
-      run: dotnet publish OnlineBankingAPIGateway/OnlineBankingAPIGateway.csproj -c Release -o ./publish --self-contained -r linux-x64 /p:UseAppHost=true
+    - name: Create Separate Publish Directories
+      run: |
+        mkdir -p ./publish/apigateway
+        mkdir -p ./publish/backend
 
-    - name: Zip Artifact
-      run: zip api.zip ./publish
+    # Publish API Gateway Separately  
+    - name: Publish API Gateway  
+      run: dotnet publish OnlineBankingAPIGateway/OnlineBankingAPIGateway.csproj -c Release -o ./publish/apigateway --self-contained -r linux-x64 /p:UseAppHost=true  
 
-    - id: upload
-      name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: dotnet-webapp
-        path: api.zip
+    # Publish Backend Separately  
+    - name: Publish Backend  
+      run: dotnet publish OnlineBankingSOA/OnlineBanking.csproj -c Release -o ./publish/backend --self-contained -r linux-x64 /p:UseAppHost=true  
+    
+    # Zip API Gateway  
+    - name: Zip API Gateway  
+      run: zip -r apigateway.zip ./publish/apigateway/*  
+    
+    # Zip Backend  
+    - name: Zip Backend  
+      run: zip -r backend.zip ./publish/backend/*  
+    
+    # Upload API Gateway Artifact  
+    - name: Upload API Gateway Artifact  
+      uses: actions/upload-artifact@v4  
+      with:  
+        name: apigateway-package  
+        path: apigateway.zip  
+    
+    # Upload Backend Artifact  
+    - name: Upload Backend Artifact  
+      uses: actions/upload-artifact@v4  
+      with:  
+        name: backend-package  
+        path: backend.zip  
+
+
+    # deploy:
+    # needs: build
+    # runs-on: ubuntu-latest
+    
+    # steps:
+    # - name: Download Artifact
+    #   uses: actions/download-artifact@v4
+    #   with:
+    #     name: dotnet-webapp        
+
+    # - name: Azure Login
+    #   uses: azure/login@v2
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # - name: Deploy to Azure
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name: api-gateway
+    #     package: app.zip 
