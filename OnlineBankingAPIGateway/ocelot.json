@@ -2,10 +2,10 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/account/balance/{accountId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "backend",
           "Port": 5001
         }
       ],
@@ -21,10 +21,10 @@
     },
     {
       "DownstreamPathTemplate": "/api/transaction/processtransaction",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "backend",
           "Port": 5001
         }
       ],

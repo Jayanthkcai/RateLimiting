@@ -25,15 +25,15 @@ builder.Services.AddSwaggerGen(c =>
 });
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseDeveloperExceptionPage();
     app.UseSwagger(c =>
     {
         c.RouteTemplate = "/swagger/{documentName}/swagger.json";
     });
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
-}
+//}
 
 // Add rate limiter middleware
 app.UseRateLimiter();
