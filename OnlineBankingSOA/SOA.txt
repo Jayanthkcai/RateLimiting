@@ -1,0 +1,56 @@
+           +--------------------------------------+
+           |       Web/Mobile User Interfaces      |
+           |  (Web Browser / Mobile Banking App)   |
+           +----------------+---------------------+
+                             |
+                             v
+           +--------------------------------------+
+           |         API Gateway / Load Balancer   |
+           | (Authentication, Throttling, Routing)|
+           +----------------+---------------------+
+                             |
+                             v
+         +-------------------+----------------------+
+         |       Service Bus / ESB (Enterprise)     |
+         | (Message Routing, Orchestration, Logging)|
+         +-------------------+----------------------+
+                             |
+   +-------------------------+-------------------------+
+   |                         |                         |
+   v                         v                         v
++---------+       +-------------------+      +-------------------+
+|  User   |       | Account Services  |      |  Transaction /    |
+| Service |       | (View Balance,    |      | Payment Services  |
+|         |       | Account Summary)  |      | (Fund Transfer,   |
++---------+       +-------------------+      | Bill Payment)     |
+                                             +-------------------+
+                             |
+                             v
+           +----------------+--------------------+
+           |   Credit / Loan Management Service  |
+           |  (Loan Applications, Credit Scoring)|
+           +----------------+--------------------+
+                             |
+                             v
+           +--------------------------------------+
+           |  Risk, Compliance & Fraud Detection   |
+           |  (AML, KYC, Monitoring)               |
+           +--------------------------------------+
+                             |
+                             v
+           +--------------------------------------+
+           |       Core Banking System (CBS)       |
+           | (Account Ledger, GL, Settlements)     |
+           +--------------------------------------+
+                             |
+                             v
+           +--------------------------------------+
+           |         External 3rd Party APIs       |
+           |  (Credit Bureaus, Payment Gateways)   |
+           +--------------------------------------+
+                             |
+                             v
+           +--------------------------------------+
+           |     Data Warehouse / Analytics Layer  |
+           | (Reports, BI, ML-based Risk Models)   |
+           +--------------------------------------+
