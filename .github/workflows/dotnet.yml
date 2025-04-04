@@ -27,8 +27,11 @@ jobs:
       run: dotnet restore
       
     - id: Build
-      name: Build
-      run: dotnet build --no-restore
+    - name: Build API
+      run: dotnet build src/OnlineBankingAPIGateway/OnlineBankingAPIGateway.csproj --no-restore
+
+    - name: Build Backend
+      run: dotnet build src/OnlineBanking/OnlineBanking.csproj --no-restore
       
     - id: Test
       name: Test
