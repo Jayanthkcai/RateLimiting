@@ -48,3 +48,17 @@ jobs:
         hide_complexity: true
         indicators: true
         output: console
+
+    - id: publish
+      name: Publish
+      run: dotnet publish OnlineBankingAPIGateway/OnlineBankingAPIGateway.csproj -c Release -o ./publish --self-contained -r linux-x64 /p:UseAppHost=true
+
+    - name: Zip Artifact
+      run: zip api.zip ./publish
+
+    - id: upload
+      name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: dotnet-webapp
+        path: api.zip
